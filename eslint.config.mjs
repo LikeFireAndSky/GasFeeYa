@@ -19,6 +19,13 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+
+    rules: {
+      // ✅ any 허용
+      "@typescript-eslint/no-explicit-any": "off",
+      // (선택) 타입 명시 안 한 함수 허용
+      "@typescript-eslint/explicit-function-return-type": "off",
+    },
   },
 ];
 
