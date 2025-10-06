@@ -55,3 +55,76 @@ npm run start
 # 린트
 npm run lint
 ```
+
+📁 폴더 구조
+app/
+page.tsx
+petroleum-gas/
+page.tsx # LPG 인덱스(시설 선택)
+specific/page.tsx
+storage/page.tsx
+retail/page.tsx
+manufacturer/page.tsx
+network/page.tsx
+high-pressure/
+page.tsx # 고압가스 인덱스(시설 선택)
+liquid/page.tsx
+compressed/page.tsx
+refrigeration/page.tsx
+pipeline/page.tsx # (추가 예정)
+retail/page.tsx # (정액)
+import/page.tsx # (정액)
+specific/
+liquid/page.tsx # 특정사용-액화
+compressed/page.tsx # 특정사용-압축
+
+components/
+Background.tsx # 전역 배경(클라이언트 컴포넌트)
+... (공용 UI 컴포넌트)
+
+lib/
+fees/
+lpgSpecific.ts
+lpgStorage.ts
+lpgRetail.ts
+lpgManufacturer.ts
+lpgNetwork.ts
+highPressure/
+liquid.ts
+compressed.ts
+refrigeration.ts
+pipeline.ts # (추가 예정)
+retail.ts # (정액)
+import.ts # (정액)
+
+🔗 라우팅 맵 (주요)
+
+/petroleum-gas → LPG 인덱스
+
+/petroleum-gas/specific
+
+/petroleum-gas/storage
+
+/petroleum-gas/retail
+
+/petroleum-gas/manufacturer
+
+/petroleum-gas/network
+
+/high-pressure → 고압가스 인덱스
+
+/high-pressure/liquid
+
+/high-pressure/compressed
+
+/high-pressure/refrigeration
+
+/high-pressure/pipeline (추가 예정)
+
+/high-pressure/retail (정액)
+
+/high-pressure/import (정액)
+
+/high-pressure/specific/liquid
+
+/high-pressure/specific/compressed
