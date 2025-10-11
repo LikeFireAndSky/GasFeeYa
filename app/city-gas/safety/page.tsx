@@ -132,9 +132,9 @@ const SafetyEvalPage = () => {
 			{/* 결과 */}
 			<div className={`${card} flex items-center justify-between`}>
 				<div>
-					<div className="text-sm text-neutral-900">예상 수수료</div>
-					<div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black">
-						{fmt(result.fee || 0)}
+					<div className="text-sm">예상 수수료(부가세포함)</div>
+					<div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+						{fmt(result.fee * 1.1 || 0)}
 					</div>
 
 					{/* 상세 */}

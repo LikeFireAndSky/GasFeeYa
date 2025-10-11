@@ -85,7 +85,7 @@ const HPImportFacilityPage = () => {
 				<div>
 					<div className="text-sm">예상 수수료</div>
 					<div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-						{formatKRW(result.fee)}
+						{formatKRW(result.fee * 1.1 || 0)}
 					</div>
 					{result.note && <div className="mt-2 text-xs">{result.note}</div>}
 				</div>

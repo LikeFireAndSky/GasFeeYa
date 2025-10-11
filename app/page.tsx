@@ -22,15 +22,11 @@ const HomePage = () => {
 		},
 	];
 
-	// 🔹 motion variants (부드러운 순차 애니메이션)
 	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
-			transition: {
-				staggerChildren: 0.15,
-				delayChildren: 0.4,
-			},
+			transition: { staggerChildren: 0.15, delayChildren: 0.4 },
 		},
 	};
 
@@ -44,74 +40,120 @@ const HomePage = () => {
 	};
 
 	return (
-		<section className="flex flex-col items-center justify-center min-h-screen text-center px-6">
-			{/* 메인 타이틀 */}
-			<motion.h1
-				className="text-6xl pb-3 sm:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 drop-shadow-lg select-none"
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 1 }}
-			>
-				GASFEEYA
-			</motion.h1>
+		<main className="flex min-h-screen flex-col">
+			{/* Hero */}
+			<section className="flex flex-1 flex-col items-center justify-center text-center px-6">
+				<motion.h1
+					className="text-6xl pb-3 sm:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 drop-shadow-lg select-none"
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 1 }}
+				>
+					GASFEEYA
+				</motion.h1>
 
-			{/* 서브 타이틀 */}
-			<motion.p
-				className="text-black text-lg sm:text-2xl font-light tracking-wider select-none"
-				initial={{ opacity: 0, y: 10 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 1.2, delay: 0.2 }}
-			>
-				한국가스안전공사 홈페이지 공시 검사 수수료 계산기
-			</motion.p>
+				<motion.p
+					className="text-black text-lg sm:text-2xl font-light tracking-wider select-none"
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 1.2, delay: 0.2 }}
+				>
+					한국가스안전공사 홈페이지 공시 검사 수수료 계산기
+				</motion.p>
 
-			{/* 링크 */}
-			<motion.a
-				className="text-gray-700 text-lg sm:text-xl font-light tracking-wider select-none"
-				href="https://www.kgs.or.kr/kgs/acdf/board.do"
-				target="_blank"
-				initial={{ opacity: 0, y: 10 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 1.2, delay: 0.2 }}
-			>
-				홈페이지에서 확인하기
-			</motion.a>
+				<motion.a
+					className="text-neutral-900 text-lg sm:text-xl font-light tracking-wider select-none underline underline-offset-4 decoration-transparent hover:decoration-neutral-300 transition"
+					href="https://www.kgs.or.kr/kgs/acdf/board.do"
+					target="_blank"
+					rel="noreferrer"
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 1.2, delay: 0.2 }}
+				>
+					👉 홈페이지에서 확인하기
+				</motion.a>
 
-			{/* 버튼 그룹 */}
-			<motion.div
-				className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10"
-				variants={containerVariants}
-				initial="hidden"
-				animate="visible"
-			>
-				{gasTypes.map((gas, index) => (
-					<motion.div
-						key={index}
-						variants={buttonVariants}
-					>
-						<Link href={gas.href}>
-							<motion.button
-								whileHover={{ scale: 1.08 }}
-								whileTap={{ scale: 0.96 }}
-								className={`
-                  cursor-pointer
-                  px-8 py-4 rounded-2xl 
-                  bg-gradient-to-r ${gas.color} 
-                  text-white font-semibold 
-                  shadow-lg shadow-black/20 
-                  hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]
-                  transition-all duration-300
-                  text-sm sm:text-base
-                  w-56 sm:w-auto
-                `}
-							>
-								{gas.name}
-							</motion.button>
-						</Link>
-					</motion.div>
-				))}
-			</motion.div>
-		</section>
+				{/* Buttons */}
+				<motion.div
+					className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10"
+					variants={containerVariants}
+					initial="hidden"
+					animate="visible"
+				>
+					{gasTypes.map((gas, index) => (
+						<motion.div
+							key={index}
+							variants={buttonVariants}
+						>
+							<Link href={gas.href}>
+								<motion.button
+									whileHover={{ scale: 1.08 }}
+									whileTap={{ scale: 0.96 }}
+									className={`
+                    cursor-pointer px-8 py-4 rounded-2xl 
+                    bg-gradient-to-r ${gas.color} 
+                    text-white font-semibold 
+                    shadow-lg shadow-black/20 
+                    hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]
+                    transition-all duration-300
+                    text-sm sm:text-base w-56 sm:w-auto
+                  `}
+								>
+									{gas.name}
+								</motion.button>
+							</Link>
+						</motion.div>
+					))}
+				</motion.div>
+			</section>
+
+			{/* Footer (센터 정렬, 미니멀 톤) */}
+			<footer className="w-full pt-6 pb-8">
+				<div className="mx-auto max-w-6xl px-6">
+					{/* 경고 문구 */}
+					<p className="text-[11px] sm:text-xs leading-relaxed text-neutral-900 text-center">
+						<span className="mr-1">⚠️</span>본 웹사이트는{' '}
+						<b>한국가스안전공사와 무관한 개인 프로젝트</b>입니다. 고시를
+						바탕으로 한 참고용 계산 도구이며, 최종 해석·적용은 반드시{' '}
+						<b>관할기관 공시/안내</b>를 확인하세요.
+					</p>
+
+					{/* 구분선 (은은하게) */}
+					<div className="mt-3 flex justify-center">
+						<div className="h-px w-24 bg-neutral-200/70" />
+					</div>
+
+					{/* 고시 출처 */}
+					<div className="mt-3 flex flex-col items-center justify-center gap-1.5 text-center text-[10.5px] sm:text-[11.5px] text-neutral-900">
+						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
+							<b className="text-black">고압가스</b>
+							<span>검사수수료 및 교육비 기준 고시</span>
+							<span>제 2025-155호</span>
+							<span>시행 2025-10-01</span>
+						</span>
+
+						<span className="opacity-40">|</span>
+
+						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
+							<b className="text-black">액화석유가스</b>
+							<span>검사수수료 및 교육비 기준 고시</span>
+							<span>제 2025-156호</span>
+							<span>시행 2025-10-01</span>
+						</span>
+
+						<span className="opacity-40">|</span>
+
+						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
+							<b className="text-black">도시가스</b>
+							<span>
+								시설 등의 검사수수료 및 교육비 기준 <u>일부개정 고시</u>
+							</span>
+							<span>시행 2025-10-01</span>
+						</span>
+					</div>
+				</div>
+			</footer>
+		</main>
 	);
 };
 

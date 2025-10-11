@@ -162,7 +162,7 @@ const HPPipelinePage = () => {
 				<div>
 					<div className="text-sm">예상 수수료</div>
 					<div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-						{formatKRW(result.fee || 0)}
+						{formatKRW(result.fee * 1.1 || 0)}
 					</div>
 					{'detail' in result && (
 						<div className="mt-2 text-xs space-y-1">
