@@ -35,7 +35,7 @@ const ButtonCard = ({
 			variants={item}
 			whileHover={{ scale: 1.03 }}
 			whileTap={{ scale: 0.98 }}
-			className={`cursor-pointer rounded-2xl p-5 border border-gray-300 bg-white/5 backdrop-blur-md shadow-lg shadow-black/10`}
+			className={`cursor-pointer rounded-2xl p-5 border border-gray-300 bg-white/5 backdrop-blur-md shadow-lg shadow-black/10 text-black`}
 		>
 			<div
 				className={`inline-block rounded-xl px-3 py-1 text-xs font-semibold text-gray-900 bg-gradient-to-r ${gradient}`}
@@ -70,7 +70,7 @@ const PetroleumGasIndexPage = () => {
 				variants={container}
 				initial="hidden"
 				animate="visible"
-				className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+				className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-black"
 			>
 				<ButtonCard
 					href="/petroleum-gas/specific"
