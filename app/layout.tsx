@@ -5,7 +5,7 @@ import RootClient from '@/components/RootClient';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://gasfeeya.example.com'), // 실제 도메인으로 교체
+	metadataBase: new URL('https://gasfeeya.co.kr'), // 실제 도메인으로 교체
 	title: {
 		default: 'GASFEEYA — 가스 검사 수수료 계산기',
 		template: '%s | GASFEEYA',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 		title: 'GASFEEYA — 가스 검사 수수료 계산기',
 		description:
 			'고시 기반의 고압가스·액화석유가스·도시가스 검사 수수료 계산기',
-		url: 'https://gasfeeya.example.com',
+		url: 'https://gasfeeya.co.kr',
 
 		locale: 'ko_KR',
 	},
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 		follow: true,
 	},
 	alternates: {
-		canonical: 'https://gasfeeya.example.com',
+		canonical: 'https://gasfeeya.co.kr',
 	},
 
 	// 필요 시 PWA
@@ -59,6 +59,12 @@ export default function RootLayout({
 			lang="ko"
 			suppressHydrationWarning
 		>
+			<head>
+				<meta
+					name="naver-site-verification"
+					content="da86d41dae8e725b1a54b89550f716525a2f5a85"
+				/>
+			</head>
 			<body className="min-h-screen bg-gray-950 text-white overflow-x-hidden">
 				<RootClient>{children}</RootClient>
 				<GoogleAnalytics gaId="G-CRX93HDWKM" />
