@@ -57,7 +57,7 @@ const CityGasChargingCompressedPage = () => {
 	}, [v]);
 
 	return (
-		<section className="min-h-[80vh] shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
+		<section className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					도시가스충전시설 — 압축가스

@@ -59,7 +59,7 @@ const CityGasChargingLiquidPage = () => {
 	}, [v]);
 
 	return (
-		<section className="min-h-[80vh] mx-auto max-w-3xl px-6 py-10 space-y-6 rounded-2xl border border-gray-300 shadow-2xl bg-white text-neutral-900">
+		<section className="min-h-[80vh] my-5 mx-auto max-w-3xl px-6 py-10 space-y-6 rounded-2xl border border-gray-300 shadow-2xl bg-white text-neutral-900">
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					도시가스 — 충전시설 (액화가스)

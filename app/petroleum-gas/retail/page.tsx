@@ -45,7 +45,7 @@ const LPGRetailPage = () => {
 		}).format(n);
 
 	return (
-		<section className="min-h-[80vh] rounded-2xl shadow-2xl border border-gray-300 mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
+		<section className="min-h-[80vh] my-5 rounded-2xl shadow-2xl border border-gray-300 mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
 					판매시설 (정액)

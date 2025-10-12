@@ -44,7 +44,7 @@ const HPRetailPage = () => {
 	}, [values]);
 
 	return (
-		<section className="min-h-[80vh] shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
+		<section className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					고압가스 — 판매시설 (정액)
@@ -83,7 +83,7 @@ const HPRetailPage = () => {
 			{/* 결과 */}
 			<div className={`${sectionCls} flex items-center justify-between`}>
 				<div>
-					<div className="text-sm">예상 수수료</div>
+					<div className="text-sm">예상 수수료(부가세포함)</div>
 					<div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
 						{formatKRW(result.fee * 1.1 || 0)}
 					</div>
