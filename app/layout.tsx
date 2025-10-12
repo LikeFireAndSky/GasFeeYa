@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import RootClient from '@/components/RootClient';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://gasfeeya.example.com'), // 실제 도메인으로 교체
@@ -60,6 +61,7 @@ export default function RootLayout({
 		>
 			<body className="min-h-screen bg-gray-950 text-white overflow-x-hidden">
 				<RootClient>{children}</RootClient>
+				<GoogleAnalytics gaId="G-CRX93HDWKM" />
 			</body>
 		</html>
 	);
