@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 
-const container: Variants = {
+export const container: Variants = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,

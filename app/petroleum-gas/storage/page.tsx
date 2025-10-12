@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { motion } from 'framer-motion';
 import {
 	calcLpgStorageFee,
 	type StorageInspectionType,
@@ -63,7 +64,12 @@ const LPGStoragePage = () => {
 		}).format(n);
 
 	return (
-		<section className="min-h-[80vh] my-5 mx-auto max-w-3xl rounded-2xl shadow-2xl border border-gray-300 px-6 py-10 space-y-6 bg-white text-neutral-900">
+		<motion.section
+			initial={{ opacity: 0, y: 10 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6, ease: 'easeOut' }}
+			className="min-h-[80vh] my-5 mx-auto max-w-3xl rounded-2xl shadow-2xl border border-gray-300 px-6 py-10 space-y-6 bg-white text-neutral-900"
+		>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
 					충전·일반 집단공급·저장소
@@ -142,7 +148,7 @@ const LPGStoragePage = () => {
 					계산됨
 				</button>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

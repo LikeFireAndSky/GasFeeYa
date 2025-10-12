@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useForm, type Resolver } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { motion } from 'framer-motion';
 import {
 	calcHpPipelineFee,
 	type HpInspect,
@@ -61,7 +62,12 @@ const HPPipelinePage = () => {
 	}, [values]);
 
 	return (
-		<section className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900">
+		<motion.section
+			initial={{ opacity: 0, y: 10 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6, ease: 'easeOut' }}
+			className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900"
+		>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					고압가스 — 배관(제조소 경계 내/외)
@@ -190,7 +196,7 @@ const HPPipelinePage = () => {
 					계산됨
 				</button>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 
