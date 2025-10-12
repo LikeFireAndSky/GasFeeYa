@@ -128,6 +128,12 @@ const HighPressureIndexPage = () => {
 					desc="표준상태 m³ 구간제 + 1,000m³ 초과 100m³ 단위 가산 + 상한."
 					gradient="from-fuchsia-500 to-rose-500"
 				/>
+				<ButtonCard
+					href="/"
+					title="돌아가기 ↩️"
+					desc="홈 메뉴로 돌아가기"
+					gradient="from-slate-300 to-slate-900 text-white rounded-xs"
+				/>
 			</motion.div>
 		</section>
 	);

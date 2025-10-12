@@ -83,8 +83,8 @@ const CityGasIndexPage = () => (
 			/>
 			<ButtonCard
 				href="/city-gas/specific/buried"
-				title="특정가스사용시설 - 배관매립시설"
-				desc="완성/정기 — 공동주택, 단독주택 기준"
+				title="특정가스사용시설 - 배관"
+				desc="완성/정기 — 공동주택, 단독주택 기준 "
 				gradient="from-fuchsia-700 to-pink-700"
 			/>
 			<ButtonCard
@@ -104,6 +104,12 @@ const CityGasIndexPage = () => (
 				title="안전관리수준평가"
 				desc="배관 총연장·시스템 기준 수수료 — 1km 미만은 1km로 계산"
 				gradient="from-violet-500 to-purple-600"
+			/>
+			<ButtonCard
+				href="/"
+				title="돌아가기 ↩️"
+				desc="홈 메뉴로 돌아가기"
+				gradient="from-slate-300 to-slate-900 text-white rounded-xs"
 			/>
 		</motion.div>
 	</section>
