@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const Background = () => {
 	return (
 		<motion.div
-			className="fixed inset-0 -z-10 overflow-hidden pointer-events-none will-change-transform"
+			className="fixed inset-0 -z-10 overflow-hidden pointer-events-none will-change-transform bg-white"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 1.2 }}
