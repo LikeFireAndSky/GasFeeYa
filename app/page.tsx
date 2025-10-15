@@ -59,7 +59,7 @@ const HomePage = () => {
 					transition={{ duration: 1.2, delay: 0.2 }}
 				>
 					한국가스안전공사 검사 수수료 계산기
-					<p className=" text-lg italic pb-3">
+					<p className=" text-sm sm:text-lg italic pb-3">
 						#한국가스안전공사 홈페이지 공지 기준
 					</p>
 				</motion.div>
