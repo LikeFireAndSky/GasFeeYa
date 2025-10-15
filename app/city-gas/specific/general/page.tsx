@@ -10,6 +10,7 @@ import {
 	calcCgSpecificGeneralFee,
 	type CgSpecType,
 } from '@/lib/fees/cityGas/specificGeneral';
+import BackButton from '@/components/BackButton';
 
 const schema = z.object({
 	type: z.enum(['completion', 'periodic']),
@@ -82,8 +83,11 @@ const CityGasSpecificGeneralPage = () => {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, ease: 'easeOut' }}
-			className="min-h-[80vh] my-5 mx-auto max-w-3xl px-6 py-10 space-y-6 rounded-2xl border border-gray-300 shadow-2xl bg-white text-neutral-900"
+			className="min-h-[80vh] my-5 mx-auto max-w-3xl px-6 py-5 space-y-6 rounded-2xl border border-gray-300 shadow-2xl bg-white text-neutral-900"
 		>
+			<div className="w-full flex justify-end">
+				<BackButton href="/city-gas" />
+			</div>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					도시가스 — 특정가스사용시설 (그 밖의 시설)

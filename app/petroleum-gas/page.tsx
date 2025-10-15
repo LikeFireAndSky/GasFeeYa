@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
+import BackButton from '@/components/BackButton';
 
 export const container: Variants = {
 	hidden: { opacity: 0 },
@@ -35,7 +36,7 @@ const ButtonCard = ({
 			variants={item}
 			whileHover={{ scale: 1.03 }}
 			whileTap={{ scale: 0.98 }}
-			className={`cursor-pointer rounded-2xl p-5 border border-gray-300 bg-white/5 backdrop-blur-md shadow-lg shadow-black/10 text-black`}
+			className={`cursor-pointer rounded-2xl p-5 border border-gray-300 bg-white/5 backdrop-blur-md shadow-lg shadow-black/10 text-black5`}
 		>
 			<div
 				className={`inline-block rounded-xl px-3 py-1 text-xs font-semibold text-gray-900 bg-gradient-to-r ${gradient}`}
@@ -57,6 +58,9 @@ const PetroleumGasIndexPage = () => {
 				transition={{ duration: 0.6, ease: 'easeOut' }}
 				className="text-center mb-10"
 			>
+				<div className="w-full flex justify-end ">
+					<BackButton href="/" />
+				</div>
 				<h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
 					액화석유가스 시설 선택
 				</h1>
@@ -101,12 +105,6 @@ const PetroleumGasIndexPage = () => {
 					title="배관망공급사업"
 					desc="정기검사 전용: 제조소(ton) + 정압기(대수) + 배관 연장(km) 합산."
 					gradient="from-violet-400 to-purple-600"
-				/>
-				<ButtonCard
-					href="/"
-					title="돌아가기 ↩️"
-					desc="홈 메뉴로 돌아가기"
-					gradient="from-slate-300 to-slate-900 text-white rounded-xs"
 				/>
 			</motion.div>
 		</section>

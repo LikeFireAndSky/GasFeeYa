@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
+import BackButton from '@/components/BackButton';
 
 const container: Variants = {
 	hidden: { opacity: 0 },
@@ -55,6 +56,9 @@ const CityGasIndexPage = () => (
 			transition={{ duration: 0.6 }}
 			className="text-center mb-10"
 		>
+			<div className="w-full flex justify-end">
+				<BackButton href="/" />
+			</div>
 			<h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black">
 				도시가스 시설 선택
 			</h1>
@@ -104,12 +108,6 @@ const CityGasIndexPage = () => (
 				title="안전관리수준평가"
 				desc="배관 총연장·시스템 기준 수수료 — 1km 미만은 1km로 계산"
 				gradient="from-violet-500 to-purple-600"
-			/>
-			<ButtonCard
-				href="/"
-				title="돌아가기 ↩️"
-				desc="홈 메뉴로 돌아가기"
-				gradient="from-slate-300 to-slate-900 text-white rounded-xs"
 			/>
 		</motion.div>
 	</section>

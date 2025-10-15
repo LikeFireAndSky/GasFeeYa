@@ -10,6 +10,7 @@ import {
 	type HpInspect,
 	type PipelineLocation,
 } from '@/lib/fees/highPressure/pipeline';
+import BackButton from '@/components/BackButton';
 
 const schema = z.object({
 	type: z.enum(['completion', 'intermediate', 'periodic']),
@@ -66,8 +67,11 @@ const HPPipelinePage = () => {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, ease: 'easeOut' }}
-			className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900"
+			className="min-h-[80vh] my-5 shadow-2xl border border-gray-300 rounded-2xl mx-auto max-w-3xl px-6 py-5 space-y-6 bg-white text-neutral-900"
 		>
+			<div className="w-full flex justify-end">
+				<BackButton href="/pressure-gas" />
+			</div>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
 					고압가스 — 배관(제조소 경계 내/외)

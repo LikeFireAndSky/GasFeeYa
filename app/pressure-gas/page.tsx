@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
+import BackButton from '@/components/BackButton';
 
 const container: Variants = {
 	hidden: { opacity: 0 },
@@ -57,6 +58,9 @@ const HighPressureIndexPage = () => {
 				transition={{ duration: 0.6, ease: 'easeOut' }}
 				className="text-center mb-10"
 			>
+				<div className="w-full flex justify-end">
+					<BackButton href="/" />
+				</div>
 				<h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black">
 					고압가스 시설 선택
 				</h1>
@@ -127,12 +131,6 @@ const HighPressureIndexPage = () => {
 					title="특정사용 — 압축"
 					desc="표준상태 m³ 구간제 + 1,000m³ 초과 100m³ 단위 가산 + 상한."
 					gradient="from-fuchsia-500 to-rose-500"
-				/>
-				<ButtonCard
-					href="/"
-					title="돌아가기 ↩️"
-					desc="홈 메뉴로 돌아가기"
-					gradient="from-slate-300 to-slate-900 text-white rounded-xs"
 				/>
 			</motion.div>
 		</section>

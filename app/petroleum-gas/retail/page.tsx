@@ -9,6 +9,7 @@ import {
 	calcLpgRetailFee,
 	type RetailInspectionType,
 } from '@/lib/fees/lpgRetail';
+import BackButton from '@/components/BackButton';
 
 /** RHF + Zod (검사종류만 선택) */
 const schema = z.object({
@@ -50,8 +51,11 @@ const LPGRetailPage = () => {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, ease: 'easeOut' }}
-			className="min-h-[80vh] my-5 rounded-2xl shadow-2xl border border-gray-300 mx-auto max-w-3xl px-6 py-10 space-y-6 bg-white text-neutral-900"
+			className="min-h-[80vh] my-5 rounded-2xl shadow-2xl border border-gray-300 mx-auto max-w-3xl px-6 py-5 space-y-6 bg-white text-neutral-900"
 		>
+			<div className="w-full flex justify-end">
+				<BackButton href="/petroleum-gas" />
+			</div>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
 					판매시설 (정액)

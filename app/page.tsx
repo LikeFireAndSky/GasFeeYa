@@ -52,17 +52,20 @@ const HomePage = () => {
 					GASFEEYA
 				</motion.h1>
 
-				<motion.p
+				<motion.div
 					className="text-black text-lg sm:text-2xl font-light tracking-wider select-none"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1.2, delay: 0.2 }}
 				>
-					한국가스안전공사 홈페이지 공시 검사 수수료 계산기
-				</motion.p>
+					한국가스안전공사 검사 수수료 계산기
+					<p className=" text-lg italic pb-3">
+						#한국가스안전공사 홈페이지 공지 기준
+					</p>
+				</motion.div>
 
 				<motion.a
-					className="text-neutral-900 text-lg sm:text-xl font-light tracking-wider select-none underline underline-offset-4 decoration-transparent hover:decoration-neutral-300 transition"
+					className="text-neutral-900 text-md sm:text-md font-light tracking-wider select-none underline underline-offset-4 decoration-transparent hover:decoration-neutral-300 transition"
 					href="https://www.kgs.or.kr/kgs/acdf/board.do"
 					target="_blank"
 					rel="noreferrer"
@@ -112,44 +115,15 @@ const HomePage = () => {
 				<div className="mx-auto max-w-6xl px-6">
 					{/* 경고 문구 */}
 					<p className="text-[11px] sm:text-xs leading-relaxed text-neutral-900 text-center">
-						<span className="mr-1">⚠️</span>본 웹사이트는{' '}
-						<b>한국가스안전공사와 무관한 개인 프로젝트</b>입니다. 고시를
-						바탕으로 한 참고용 계산 도구이며, 최종 해석·적용은 반드시{' '}
+						<span className="mr-1"></span>본 웹사이트는{' '}
+						<b>한국가스안전공사와 무관한 개인 프로젝트</b>입니다. <br />
+						고시를 바탕으로 한 참고용 계산 도구이며, 최종 해석·적용은 반드시{' '}
 						<b>관할기관 공시/안내</b>를 확인하세요.
 					</p>
 
 					{/* 구분선 (은은하게) */}
 					<div className="mt-3 flex justify-center">
 						<div className="h-px w-24 bg-neutral-200/70" />
-					</div>
-
-					{/* 고시 출처 */}
-					<div className="mt-3 flex flex-col items-center justify-center gap-1.5 text-center text-[10.5px] sm:text-[11.5px] text-neutral-900">
-						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
-							<b className="text-black">고압가스</b>
-							<span>검사수수료 및 교육비 기준 고시</span>
-							<span>제 2025-155호</span>
-							<span>시행 2025-10-01</span>
-						</span>
-
-						<span className="opacity-40">|</span>
-
-						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
-							<b className="text-black">액화석유가스</b>
-							<span>검사수수료 및 교육비 기준 고시</span>
-							<span>제 2025-156호</span>
-							<span>시행 2025-10-01</span>
-						</span>
-
-						<span className="opacity-40">|</span>
-
-						<span className="inline-flex flex-wrap items-center justify-center gap-1.5">
-							<b className="text-black">도시가스</b>
-							<span>
-								시설 등의 검사수수료 및 교육비 기준 <u>일부개정 고시</u>
-							</span>
-							<span>시행 2025-10-01</span>
-						</span>
 					</div>
 				</div>
 			</footer>
