@@ -115,15 +115,25 @@ const HomePage = () => {
 				<div className="mx-auto max-w-6xl px-6">
 					{/* 경고 문구 */}
 					<p className="text-[11px] sm:text-xs leading-relaxed text-neutral-900 text-center">
-						<span className="mr-1"></span>본 웹사이트는{' '}
-						<b>한국가스안전공사와 무관한 개인 프로젝트</b>입니다. <br />
+						본 웹사이트는 <b>한국가스안전공사와 무관한 개인 프로젝트</b>입니다.{' '}
+						<br />
 						고시를 바탕으로 한 참고용 계산 도구이며, 최종 해석·적용은 반드시{' '}
 						<b>관할기관 공시/안내</b>를 확인하세요.
 					</p>
 
 					{/* 구분선 (은은하게) */}
-					<div className="mt-3 flex justify-center">
-						<div className="h-px w-24 bg-neutral-200/70" />
+					<div className="mt-1 flex justify-center">
+						<motion.a
+							className="text-neutral-900 text-xs sm:text-xs font-light tracking-wider select-none underline underline-offset-4 decoration-transparent hover:decoration-neutral-300 transition"
+							href="https://github.com/LikeFireAndSky/GasFeeYa"
+							target="_blank"
+							rel="noreferrer"
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 1.2, delay: 0.2 }}
+						>
+							🛠️ 개발 페이지 바로가기
+						</motion.a>
 					</div>
 				</div>
 			</footer>
