@@ -7,7 +7,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 export const metadata: Metadata = {
 	metadataBase: new URL('https://gasfeeya.co.kr'), // 실제 도메인으로 교체
 	title: {
-		default: 'GASFEEYA — 가스 검사 수수료 계산기',
+		default: 'GASFEEYA — 한국가스안전공사 검사 수수료 계산기',
 		template: '%s | GASFEEYA',
 	},
 	description:
