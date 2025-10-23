@@ -58,7 +58,7 @@ const HighPressureIndexPage = () => {
 				transition={{ duration: 0.6, ease: 'easeOut' }}
 				className="text-center mb-10"
 			>
-				<div className="w-full flex justify-end">
+				<div className="w-full flex justify-end mb-3">
 					<BackButton href="/" />
 				</div>
 				<h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black">
