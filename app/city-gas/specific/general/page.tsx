@@ -90,7 +90,7 @@ const CityGasSpecificGeneralPage = () => {
 			</div>
 			<div className="text-center">
 				<h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">
-					도시가스 — 특정가스사용시설 (그 밖의 시설)
+					도시가스 — 특정가스사용시설 (일반)
 				</h1>
 				<p className="mt-2 text-[15px] text-black">
 					월사용예정량 기준. 4,000㎥ 초과 시 <b>500㎥ “완전 단위”</b> 가산 +

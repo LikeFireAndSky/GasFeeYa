@@ -1,6 +1,7 @@
 // lib/fees/cityGas/supply.ts
 // 도시가스 가스공급시설 — 정기검사 수수료 계산
 // 항목: 제조소(SNG/일반), 공급소, 정압(밸브)기지, 정압기, 배관 연장(km)
+// 변경: 10km 초과분이 발생하면 바로 올림하여 1km 단위 가산 (10.0001 -> 1km 가산)
 
 export type CgSupplyInputs = {
 	sngPlant?: number; // 가스도매(SNG) 제조소 개수
@@ -73,10 +74,12 @@ export const calcCgSupplyPeriodicFee = (
 			pipelineFee = PIPE.r5to10;
 			pipelineBand = '5–<10km';
 		} else {
-			const over = Math.ceil(km - 10); // 10km 초과 '1km 단위' 올림
-			pipelineFee = PIPE.gte10.base + over * PIPE.gte10.addPerKm;
+			// 변경: 10km를 초과하면 초과분이 있으면 즉시 올림하여 1km 단위 가산
+			// 예: km = 10.0001 -> overCeil = ceil(0.0001) = 1
+			const overCeil = Math.ceil(Math.max(0, km - 10));
+			pipelineFee = PIPE.gte10.base + overCeil * PIPE.gte10.addPerKm;
 			pipelineBand = '≥10km';
-			pipelineOverKm = over;
+			pipelineOverKm = overCeil;
 		}
 	}
 

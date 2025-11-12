@@ -48,9 +48,16 @@ export const calcHpRefrigerationFee = (type: HpInspect, ton: number) => {
 			? base.i!
 			: base.p!;
 
+	// 변경: 소수톤 포함 — 500을 초과하면 즉시(예: 500.1t) 1단계 가산
 	const over = Math.max(0, ton - 500);
-	// ✅ 100t '완전한' 단위마다 가산 (예: 500.1~599.9 → 0단계, 600~699.9 → 1단계)
-	const steps = Math.floor(over / 100);
+	const steps = over > 0 ? Math.ceil(over / 100) : 0;
+	// 결과 예:
+	// ton = 500    -> over = 0    -> steps = 0
+	// ton = 500.1  -> over = 0.1  -> steps = 1
+	// ton = 599.9  -> over = 99.9 -> steps = 1
+	// ton = 600    -> over = 100  -> steps = 1
+	// ton = 600.0001 -> over >100 -> steps = 2
+
 	const add = OVER[type].addPer100;
 	const cap = OVER[type].cap;
 	const fee0 = baseFee + steps * add;

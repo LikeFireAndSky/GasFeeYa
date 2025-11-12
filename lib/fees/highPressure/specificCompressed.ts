@@ -36,10 +36,12 @@ export const calcHpSpecificCompressedFee = (
 	// > 1,000 m³
 	const base = BANDS[BANDS.length - 1];
 	const baseFee = type === 'completion' ? base.c! : base.p!;
-	const over = capacityStdM3 - 1_000;
 
-	// ✅ 100m³ '완전한' 단위마다 가산 (예: 1001~1099 → 0단계, 1100~1199 → 1단계)
-	const steps = Math.floor(over / 100);
+	// 변경: 소수 포함 — 1,000을 초과하면 즉시(예: 1000.1) 1단계 가산
+	const over = Math.max(0, capacityStdM3 - 1_000);
+	const steps = over > 0 ? Math.ceil(over / 100) : 0;
+	// 예: over = 0.1..100 -> steps = 1 (1000.1 ~ 1100)
+	//     over = 100.1..200 -> steps = 2 (1100.1 ~ 1200), 등
 
 	const fee0 = baseFee + steps * OVER[type].addPer100;
 	const fee = Math.min(fee0, OVER[type].cap);

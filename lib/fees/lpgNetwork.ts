@@ -1,5 +1,6 @@
 // lib/fees/lpgNetwork.ts
 // ✅ "0이면 그 항목은 0원" + '완전한' 단위 기준 가산(500t / 1km)
+// 변경: 초과분이 있으면 즉시 가산(예: 1000.1~1500 => 1단계, 1500.1~2000 => 2단계; 10.1km => 1km 가산)
 
 export type NetworkInputs = {
 	plantCapacityTon?: number; // 제조소 저장능력(ton)
@@ -39,10 +40,10 @@ export const calcLpgNetworkFee = (inputs: NetworkInputs) => {
 		if (row) {
 			plantFee = row.fee;
 		} else {
-			// ✅ '완전한' 500t 단위마다 가산 (예: 1000.1~1499.9 → 0단계, 1500~1999.9 → 1단계)
+			// 변경: 초과분이 있으면 즉시 가산 (1000.0001 -> 1단계)
 			const base = PLANT_TABLE[PLANT_TABLE.length - 1].fee; // ≤1000 구간
-			const over = Math.max(0, plantTon - 1000);
-			const steps = Math.floor(over / 500);
+			const over = Math.max(0, plantTon - 1000); // 소수 포함
+			const steps = over > 0 ? Math.ceil(over / 500) : 0;
 			plantFee = Math.min(base + steps * OVER_1000.addPer500Ton, OVER_1000.cap);
 		}
 	}
@@ -57,9 +58,10 @@ export const calcLpgNetworkFee = (inputs: NetworkInputs) => {
 		else if (km < 5) pipeFee = PIPELINE.r2to5km;
 		else if (km < 10) pipeFee = PIPELINE.r5to10km;
 		else {
-			// ✅ '완전한' 1km 단위마다 가산 (예: 10.1~10.999 → 0단계, 11.0~11.999 → 1단계)
-			const overKm = Math.floor(Math.max(0, km - 10));
-			pipeFee = PIPELINE.gte10km.base + overKm * PIPELINE.gte10km.addPerKm;
+			// 변경: 10km 초과 시 초과분이 있으면 즉시 1km 단위 가산 (10.0001km -> 1km 가산)
+			const overKm = Math.max(0, km - 10); // 소수 포함
+			const stepsKm = overKm > 0 ? Math.ceil(overKm) : 0; // 0<x<=1 -> 1
+			pipeFee = PIPELINE.gte10km.base + stepsKm * PIPELINE.gte10km.addPerKm;
 		}
 	}
 

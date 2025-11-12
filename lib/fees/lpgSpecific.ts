@@ -92,10 +92,10 @@ const tryResidentialCompletion = (
 };
 
 // 4) 100kg 단위 가산 step 계산 (500kg 초과분만)
-//    ✅ 변경: '완전한' 100kg 단위마다 가산 (예: 501~599 → 0단계, 600~699 → 1단계)
+//    변경: 501~600 => 1단계, 601~700 => 2단계 ... (각 구간의 상한 포함)
 const stepsOver500By100kg = (effectiveKg: number): number => {
 	const over = Math.max(0, effectiveKg - 500);
-	return Math.floor(over / 100);
+	return Math.ceil(over / 100); // 0이면 0, 1~100 => 1, 101~200 => 2, ...
 };
 
 // 5) 구간 계산 - 완성
@@ -115,7 +115,7 @@ const computeCompletion = (effectiveKg: number): SpecificFeeResult => {
 			detail: { effectiveKg, baseBand: '300-500' },
 		};
 	}
-	const steps = stepsOver500By100kg(effectiveKg);
+	const steps = stepsOver500By100kg(effectiveKg); // +1 제거
 	const fee = Math.min(
 		COMPLETION_300_500 + steps * COMPLETION_OVER500_ADD_PER_100KG,
 		COMPLETION_OVER500_CAP,
@@ -160,7 +160,7 @@ const computePeriodic = (effectiveKg: number): SpecificFeeResult => {
 			detail: { effectiveKg, baseBand: '300-500' },
 		};
 	}
-	const steps = stepsOver500By100kg(effectiveKg);
+	const steps = stepsOver500By100kg(effectiveKg); // +1 제거
 	const fee = Math.min(
 		PERIODIC_300_500 + steps * PERIODIC_OVER500_ADD_PER_100KG,
 		PERIODIC_OVER500_CAP,

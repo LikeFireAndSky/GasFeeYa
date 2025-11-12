@@ -49,9 +49,15 @@ export const calcHpCompressedFee = (type: HpInspect, stdM3: number) => {
 			? base.i!
 			: base.p!;
 
+	// 변경: 소수 포함 — 1,000,000을 초과하면 즉시(예: 1,000,000.1) 1단계 가산
 	const over = Math.max(0, stdM3 - 1_000_000);
-	// ✅ 10만 m³ '완전한' 단위마다 가산 (예: 1,000,001~1,099,999 → 0단계, 1,100,000~1,199,999 → 1단계)
-	const steps = Math.floor(over / 100_000);
+	const steps = over > 0 ? Math.ceil(over / 100_000) : 0;
+	// 결과 예:
+	// 1_000_000    -> steps = 0
+	// 1_000_000.1  -> steps = 1
+	// 1_100_000    -> steps = 1
+	// 1_100_000.1  -> steps = 2
+
 	const add = OVER[type].addPer100k;
 	const cap = OVER[type].cap;
 	const fee0 = baseFee + steps * add;

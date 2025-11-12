@@ -55,10 +55,13 @@ export const calcLpgStorageFee = (
 		return { fee, detail: { band: row.band } };
 	}
 
-	// 1000t 초과 가산 + 상한 (✅ '완전한' 500t 단위마다 가산)
+	// 1000t 초과 가산 + 상한
 	const base = TABLE[TABLE.length - 1];
-	const over = Math.max(0, capacityTon - 1000);
-	const steps = Math.floor(over / 500); // 예: 1000.1~1499.9 → 0, 1500~1999.9 → 1
+
+	// 변경: 소수톤 포함 — 1000을 초과하면 즉시(예: 1000.1) 가산 시작
+	const over = Math.max(0, capacityTon - 1000); // 1000.1 -> over = 0.1
+	const steps = over > 0 ? Math.ceil(over / 500) : 0;
+	// 결과 예: over=0.1..500 => steps=1 (1000.0001 ~ 1500), over=500.0001..1000 => steps=2 (1500.0001 ~ 2000), 등
 
 	if (type === 'completion') {
 		const fee = Math.min(

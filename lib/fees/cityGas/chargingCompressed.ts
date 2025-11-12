@@ -2,7 +2,6 @@
 // 도시가스충전시설 — 압축가스 (중간/완성/정기) 계산 모듈
 // 수치 근거: 도시가스시설 등의 검사수수료 및 교육비 기준 [별표 4] (도시가스충전시설 - 압축가스)
 
-// 타입
 export type CgInspect = 'completion' | 'intermediate' | 'periodic';
 
 type Band = {
@@ -54,24 +53,24 @@ export const calcCgChargingCompressedFee = (
 		return { fee, detail: { band: `≤${row.max.toLocaleString()}m³` } };
 	}
 
-	// > 1,000,000 m³ : “완전한 10만 ㎥ 단위”만 가산
+	// > 1,000,000 m³ : 초과분이 있으면 즉시(예: 1_000_000.1) 올림하여 10만 단위 가산
 	const base = BANDS[BANDS.length - 1];
 	const baseFee =
 		type === 'completion' ? base.c : type === 'intermediate' ? base.i : base.p;
 
-	const over = capacityStdM3 - 1_000_000;
-	const fullSteps = Math.max(0, Math.floor(over / 100_000)); // 완전 10만㎥ 단위
+	const over = Math.max(0, capacityStdM3 - 1_000_000);
+	const steps = over > 0 ? Math.ceil(over / 100_000) : 0; // 변경: 초과분 즉시 반영
 	const add = OVER[type].addPer100k;
 	const cap = OVER[type].cap;
 
-	const fee0 = baseFee + fullSteps * add;
+	const fee0 = baseFee + steps * add;
 	const fee = Math.min(fee0, cap);
 
 	return {
 		fee,
 		detail: {
 			band: '>1,000,000m³',
-			steps: fullSteps,
+			steps,
 			capped: fee === cap,
 		},
 	};

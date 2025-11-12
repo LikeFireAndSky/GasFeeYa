@@ -1,5 +1,6 @@
 // lib/fees/highPressure/pipeline.ts
 // 고압가스(배관) 수수료 계산 (완성/중간/정기 + 위치별 규칙)
+// 변경: 5km 초과분이 발생하면 즉시 가산 (소수 포함, 초과분이 있으면 올림 처리)
 
 export type HpInspect = 'completion' | 'intermediate' | 'periodic';
 export type PipelineLocation =
@@ -30,8 +31,8 @@ const INSIDE_I: Row[] = [
 const INSIDE_I_ADD_PER_KM = 33_000;
 
 /** 제조소 경계 '내' 배관 기준 계산 (완성/정기 공통 로직, 중간은 별도)
- *  ▶ 변경: 5km 초과분 가산은 '완전한' 1km 단위마다 적용
- *     예) 5.1~5.999km → 0단계, 6.0~6.999km → 1단계, 7.0~7.999km → 2단계
+ *  ▶ 변경: 5km 초과분 가산은 소수 포함 즉시 반영(올림)
+ *     예) 5.0001~6.0000km -> 1단계, 6.0001~7.0000km -> 2단계
  */
 const calcInsideFee = (type: HpInspect, lengthKm: number) => {
 	if (!Number.isFinite(lengthKm) || lengthKm <= 0) {
@@ -42,7 +43,9 @@ const calcInsideFee = (type: HpInspect, lengthKm: number) => {
 		const row = INSIDE_I.find(r => lengthKm <= r.maxKm);
 		if (row) return { fee: row.fee, detail: { band: `≤${row.maxKm}km` } };
 
-		const fullExtraKm = Math.floor(Math.max(0, lengthKm - 5)); // ✅ 완전한 1km 단위만 가산
+		// 변경: 초과분이 있으면 즉시 올림하여 1km 단위 가산
+		const over = Math.max(0, lengthKm - 5);
+		const fullExtraKm = over > 0 ? Math.ceil(over) : 0;
 		const base5 = INSIDE_I[INSIDE_I.length - 1].fee;
 		const fee = base5 + fullExtraKm * INSIDE_I_ADD_PER_KM;
 		return {
@@ -51,6 +54,7 @@ const calcInsideFee = (type: HpInspect, lengthKm: number) => {
 				band: '>5km',
 				overKm: fullExtraKm,
 				addPerKm: INSIDE_I_ADD_PER_KM,
+				note: '초과분이 있으면 즉시 올림하여 1km 단위 가산',
 			},
 		};
 	}
@@ -59,7 +63,9 @@ const calcInsideFee = (type: HpInspect, lengthKm: number) => {
 	const row = INSIDE_CP.find(r => lengthKm <= r.maxKm);
 	if (row) return { fee: row.fee, detail: { band: `≤${row.maxKm}km` } };
 
-	const fullExtraKm = Math.floor(Math.max(0, lengthKm - 5)); // ✅ 완전한 1km 단위만 가산
+	// 변경: 초과분이 있으면 즉시 올림하여 1km 단위 가산
+	const over = Math.max(0, lengthKm - 5);
+	const fullExtraKm = over > 0 ? Math.ceil(over) : 0;
 	const base5 = INSIDE_CP[INSIDE_CP.length - 1].fee;
 	const fee = base5 + fullExtraKm * INSIDE_CP_ADD_PER_KM;
 	return {
@@ -68,6 +74,7 @@ const calcInsideFee = (type: HpInspect, lengthKm: number) => {
 			band: '>5km',
 			overKm: fullExtraKm,
 			addPerKm: INSIDE_CP_ADD_PER_KM,
+			note: '초과분이 있으면 즉시 올림하여 1km 단위 가산',
 		},
 	};
 };

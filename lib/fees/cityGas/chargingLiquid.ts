@@ -17,7 +17,7 @@ const BANDS: Band[] = [
 	{ max: 1000, c: 1_443_000, i: 768_000, p: 913_000 },
 ];
 
-// >1000t 구간: “완전한 500t 초과분”마다 가산 + 상한
+// >1000t 구간: 초과분이 있으면 즉시 '완전한' 500t 단위마다 가산 + 상한
 const OVER = {
 	completion: { addPer500: 167_000, cap: 4_133_000 },
 	intermediate: { addPer500: 100_000, cap: 2_435_000 },
@@ -40,7 +40,7 @@ export const calcCgChargingLiquidFee = (type: CgInspect, ton: number) => {
 		return { fee, detail: { band: `≤${row.max}t` } };
 	}
 
-	// > 1000t : 500t "완전단위" 가산(올림 아님, 내림)
+	// > 1000t : 초과분이 있으면 즉시 가산 (예: 1000.1~1500.0 -> 1단계, 1500.1~2000.0 -> 2단계)
 	const base = BANDS[BANDS.length - 1];
 	const baseFee =
 		type === 'completion'
@@ -49,9 +49,9 @@ export const calcCgChargingLiquidFee = (type: CgInspect, ton: number) => {
 			? base.i!
 			: base.p!;
 
-	// 예) 1000.1t ~ 1499.9t => steps = 0 (가산 없음), 1500t~1999.9t => steps = 1
-	const over = ton - 1000;
-	const steps = Math.floor(over / 500);
+	const over = Math.max(0, ton - 1000);
+	const steps = over > 0 ? Math.ceil(over / 500) : 0; // 변경: 초과분이 있으면 즉시 올림
+
 	const add = OVER[type].addPer500;
 	const cap = OVER[type].cap;
 

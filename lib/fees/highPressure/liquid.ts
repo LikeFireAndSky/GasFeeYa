@@ -47,9 +47,11 @@ export const calcHpLiquidFee = (type: HpInspect, ton: number) => {
 			? base.i!
 			: base.p!;
 
-	// ✅ '완전한' 500t 단위마다 가산 (예: 1000.1~1499.9t → 0단계, 1500~1999.9t → 1단계)
-	const over = Math.max(0, ton - 1000);
-	const steps = Math.floor(over / 500);
+	// 변경: 소수톤 포함 — 1000을 초과하면 즉시 1단계 가산 (예: 1000.1 -> 1단계)
+	const over = Math.max(0, ton - 1000); // 소수 포함
+	const steps = over > 0 ? Math.ceil(over / 500) : 0;
+	// 결과: over = 0.0001..500 -> steps = 1 (1000.0001 ~ 1500)
+	//        over = 500.0001..1000 -> steps = 2 (1500.0001 ~ 2000), 등
 
 	const add = OVER[type].addPer500;
 	const cap = OVER[type].cap;

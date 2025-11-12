@@ -1,7 +1,7 @@
 // lib/fees/cityGas/specificGeneral.ts
 // 도시가스 특정가스사용시설 — 그 밖의 시설(월사용예정량 기준) 수수료
 // 옵션 반영: 시·도 지정(완성=정기 요율), 2실 이하 정기 상한(194,000), 금속 이중관(완성 +104,000)
-// 가산 철학: 4,000m³ 초과분은 '완전한' 500m³ 단위마다 가산
+// 가산 철학: 4,000m³ 초과분은 '완전한' 500m³ 단위마다 가산 (초과분이 있으면 즉시 올림 처리)
 
 export type CgSpecType = 'completion' | 'periodic';
 
@@ -76,7 +76,9 @@ export const calcCgSpecificGeneralFee = (
 		fee = effType === 'completion' ? BAND2.c : BAND2.p;
 		detail.band = '≤4000';
 	} else {
-		const steps = Math.floor((monthlyM3 - 4_000) / 500); // 완전 500㎥ 단위
+		// 변경: 초과분이 있으면 즉시 올림하여 500m³ 단위 가산
+		const over = Math.max(0, monthlyM3 - 4_000);
+		const steps = over > 0 ? Math.ceil(over / 500) : 0; // 4,000.1 -> 1, 4,500 -> 1, 4,500.1 -> 2
 		const base = effType === 'completion' ? BAND2.c : BAND2.p;
 		const addPer = effType === 'completion' ? OVER4K_ADD.c : OVER4K_ADD.p;
 		const cap = effType === 'completion' ? CAP.c : CAP.p;
@@ -103,3 +105,4 @@ export const calcCgSpecificGeneralFee = (
 
 	return { fee, detail };
 };
+

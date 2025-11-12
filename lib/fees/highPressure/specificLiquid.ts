@@ -35,10 +35,16 @@ export const calcHpSpecificLiquidFee = (
 	// > 500kg
 	const base = BANDS[BANDS.length - 1];
 	const baseFee = type === 'completion' ? base.c! : base.p!;
-	const over = capacityKg - 500;
 
-	// ✅ 100kg '완전한' 단위마다 가산 (예: 501~599 → 0단계, 600~699 → 1단계)
-	const steps = Math.floor(over / 100);
+	// 변경: 소수 kg 포함 — 500을 초과하면 즉시 1단계 가산 (예: 500.1 -> 1단계)
+	const over = Math.max(0, capacityKg - 500);
+	const steps = over > 0 ? Math.ceil(over / 100) : 0;
+	// 결과 예:
+	// 500    -> steps = 0
+	// 500.1  -> steps = 1
+	// 599.9  -> steps = 1
+	// 600    -> steps = 1
+	// 600.1  -> steps = 2
 
 	const fee0 = baseFee + steps * OVER[type].addPer100;
 	const fee = Math.min(fee0, OVER[type].cap);
